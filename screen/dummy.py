@@ -32,14 +32,16 @@ class DummyKeypad(AbstractKeypad):
 
         return self.which_key(ch)
 
-    def which_key(self, ch_number):
-        if ch_number == '\x1b[A':
+    def which_key(self, char):
+        if char == 'w':
             return Keypad.UP
-        elif ch_number == '\x1b[B':
+        elif char == 's':
             return Keypad.DOWN
-        elif ch_number == '\x1b[C':
+        elif char == 'd':
             return Keypad.RIGHT
-        elif ch_number == '\x1b[D':
+        elif char == 'a':
             return Keypad.LEFT
+        elif char == "e":
+            return Keypad.SELECT
         else:
             return Keypad.EXIT

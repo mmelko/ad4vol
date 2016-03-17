@@ -36,9 +36,8 @@ class AbstractMenu:
     def start(self):
         char = 0
         while char <> Keypad.EXIT:
-            self.screen.clean_screen()
             char = self.keypad.key_pressed()
-
+            self.screen.clean_screen()
             if char == Keypad.LEFT:
                 self.left_action()
             elif char == Keypad.RIGHT:
