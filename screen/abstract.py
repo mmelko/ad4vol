@@ -4,7 +4,7 @@ from abc import ABCMeta, abstractmethod
 # abstract screen "interface"
 #
 
-class AbstractSreen:
+class AbstractScreen:
     __metaclass__ = ABCMeta
 
     def __init__(self):

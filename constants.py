@@ -4,3 +4,4 @@ class Keypad:
     LEFT = 2
     RIGHT = 3
     SELECT = 4
+    EXIT = -1

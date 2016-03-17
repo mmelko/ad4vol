@@ -1,15 +1,8 @@
-from screen.dummy import DummyScreen
-import time
-import datetime
+from screen.dummy import DummyScreen, DummyKeypad
+from menu.main import HomeScreen
 
 
-
-dummy_screen = DummyScreen()
+client = HomeScreen(DummyKeypad(), DummyScreen())
 refresh_rate = 20
 
-while True:
-    dummy_screen.clean_screen()
-    dummy_screen.display_string(datetime.datetime.now().time())
-    time.sleep(1.0/refresh_rate)
-
-
+client.start()
