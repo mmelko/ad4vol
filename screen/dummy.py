@@ -12,11 +12,19 @@ Dummy screen implementation, mainly for testing purposes. Dummy screen shows
 
 
 class DummyScreen(AbstractScreen):
+
+
     def display_string(self, string):
-        print string
+
+
+        print "==================="
+        print  string
+        print  ""
+        print "================== "
 
     def clean_screen(self):
         os.system('clear')
+
 
 
 class DummyKeypad(AbstractKeypad):

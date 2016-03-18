@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from screen.abstract import *
 from constants import Keypad
+import time
 
 
 # abstract class which defines abstract menu. Every menu and submenu should
@@ -12,6 +13,11 @@ class AbstractMenu:
     def __init__(self, keypad, screen):
         self.keypad = keypad
         self.screen = screen
+        self.refresh_rate = 20
+
+    @abstractmethod
+    def main_screen(self):
+        return
 
     @abstractmethod
     def left_action(self):
@@ -36,6 +42,7 @@ class AbstractMenu:
     def start(self):
         char = 0
         while char <> Keypad.EXIT:
+            self.main_screen()
             char = self.keypad.key_pressed()
             self.screen.clean_screen()
             if char == Keypad.LEFT:
@@ -48,3 +55,4 @@ class AbstractMenu:
                 self.down_action()
             elif char == Keypad.SELECT:
                 self.accept_action()
+            time.sleep(1.0/20)
