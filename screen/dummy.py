@@ -5,6 +5,7 @@ import tty
 import termios
 import os
 
+
 '''
 @Author mmelko
 Dummy screen implementation, mainly for testing purposes. Dummy screen shows
@@ -15,12 +16,8 @@ class DummyScreen(AbstractScreen):
 
 
     def display_string(self, string):
-
-
-        print "==================="
-        print  string
-        print  ""
-        print "================== "
+        self.clean_screen()
+        sys.stdout.write("=============================\n"+string+"\n===========================\n")
 
     def clean_screen(self):
         os.system('clear')
@@ -28,6 +25,22 @@ class DummyScreen(AbstractScreen):
 
 
 class DummyKeypad(AbstractKeypad):
+
+    def __init__(self):
+        super(DummyKeypad,self).__init__()
+        '''try:
+            self.screen = curses.initscr()
+            curses.cbreak()
+            #curses.noecho()
+        except:
+      # In event of error, restore terminal to sane state.
+            self.screen.keypad(0)
+            curses.echo()
+            curses.nocbreak()
+            curses.endwin()
+            traceback.print_exc()
+
+        '''
     def key_pressed(self):
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
@@ -36,9 +49,18 @@ class DummyKeypad(AbstractKeypad):
             ch = sys.stdin.read(1)
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        print ord(ch)
+        #print "b;a b;a bla bla bal alb"
 
+        #ch = self.screen.getch()
+
+        #return self.which_key(str(unichr(ch)))
         return self.which_key(ch)
+
+    def stop_and_clean(self):
+        pass
+        #curses.echo()
+        #curses.nocbreak()
+        #curses.endwin()
 
     def which_key(self, char):
         if char == 'w':
@@ -51,5 +73,6 @@ class DummyKeypad(AbstractKeypad):
             return Keypad.LEFT
         elif char == "e":
             return Keypad.SELECT
-        else:
+            #press CTRL+C
+        elif ord(char) == 3:
             return Keypad.EXIT

@@ -25,7 +25,13 @@ class MPDClient (AbstractMusicClient):
 
 
     def get_current_time(self):
-        pass
+        self.connect()
+        temp = self.client.status()['time'].split(":")[0]
+        time = int(temp)
+        self.client.disconnect()
+	
+        return "%02d:%02d" % ((time/60),(time % 60))
+
 
     def connect(self):
         self.client.connect(self.host,self.port)

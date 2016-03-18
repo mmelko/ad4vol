@@ -11,20 +11,19 @@ class HomeScreen(AbstractMenu):
         self.client = MPDClient()
 
     def main_screen(self):
-        self.screen.clean_screen()
-        self.screen.display_string(self.client.get_current_song())
+        self.display_string(self.client.get_current_song() + "\n" + self.client.get_current_time())
 
     def left_action(self):
-        self.screen.display_string("Previous track")
+        self.display_string("Previous track")
 
     def right_action(self):
-        self.screen.display_string("Next track")
+        self.display_string("Next track")
 
     def up_action(self):
-        self.screen.display_string("Volume UP")
+        self.display_string("Volume UP")
 
     def down_action(self):
-        self.screen.display_string("Volume Down")
+        self.display_string("Volume Down")
 
     def accept_action(self):
         pass
