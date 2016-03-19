@@ -1,8 +1,8 @@
 from abstract import AbstractMusicClient
 import mpd
 
-class MPDClient (AbstractMusicClient):
 
+class MPDClient(AbstractMusicClient):
     def __init__(self):
         self.client = mpd.MPDClient()
         self.client.timeout = 10
@@ -22,16 +22,25 @@ class MPDClient (AbstractMusicClient):
         self.client.disconnect()
         return artist + " - " + title
 
-
+    def is_playing(self):
+        if self.getStatus('state') <> "stop":
+            return True
+        else:
+            return False
 
     def get_current_time(self):
         self.connect()
         temp = self.client.status()['time'].split(":")[0]
         time = int(temp)
         self.client.disconnect()
-	
-        return "%02d:%02d" % ((time/60),(time % 60))
 
+        return "%02d:%02d" % ((time / 60), (time % 60))
 
     def connect(self):
-        self.client.connect(self.host,self.port)
+        self.client.connect(self.host, self.port)
+
+    def getStatus(self, thing):
+        self.connect()
+        res = self.client.status()[thing]
+        self.client.disconnect()
+        return res

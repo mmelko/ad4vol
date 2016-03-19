@@ -4,10 +4,10 @@ from screen.adafruit import AdafruitLCD, AdafruitKeypad
 
 
 #client = HomeScreen(DummyKeypad(), DummyScreen())
-lcd =  {DummyScreen()}
+lcd =  {DummyScreen(),AdafruitLCD()}
 #lcd = DummyScreen()
-keypad = AdafruitKeypad()
-#keypad = DummyKeypad()
+#keypad = AdafruitKeypad()
+keypad = DummyKeypad()
 client = HomeScreen(keypad,lcd)
 refresh_rate = 20
 

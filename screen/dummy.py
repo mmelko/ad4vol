@@ -17,7 +17,7 @@ class DummyScreen(AbstractScreen):
 
     def display_string(self, string):
         self.clean_screen()
-        sys.stdout.write("=============================\n"+string+"\n===========================\n")
+        sys.stdout.write(string+"\n")
 
     def clean_screen(self):
         os.system('clear')

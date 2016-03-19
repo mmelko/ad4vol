@@ -14,3 +14,7 @@ class AbstractMusicClient:
     @abstractmethod
     def get_current_time(self):
         pass
+
+    @abstractmethod
+    def is_playing(self):
+        pass

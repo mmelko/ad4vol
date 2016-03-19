@@ -65,5 +65,5 @@ class AbstractMenu:
                 time.sleep(0.5)
             else:
                 self.main_screen()
-            time.sleep(1.0/5)
+            time.sleep(1.0/1.5)
             char = self.keypad.is_pressed
