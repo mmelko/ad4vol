@@ -3,6 +3,12 @@ import mpd
 
 
 class MPDClient(AbstractMusicClient):
+    def play(self):
+        pass
+
+    def stop(self):
+        pass
+
     def __init__(self):
         self.client = mpd.MPDClient()
         self.client.timeout = 10
@@ -44,3 +50,19 @@ class MPDClient(AbstractMusicClient):
         res = self.client.status()[thing]
         self.client.disconnect()
         return res
+
+    def next_track(self):
+        self.connect()
+        self.client.next()
+        self.client.disconnect()
+
+    def previous_track(self):
+        self.connect()
+        self.client.previous()
+        self.client.disconnect()
+
+    def volume_up(self):
+        pass
+
+    def volume_down(self):
+        pass

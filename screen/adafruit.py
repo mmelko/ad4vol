@@ -14,11 +14,9 @@ class AdafruitLCD(AbstractScreen):
     def display_string(self, string):
         self.clean_screen()
         temp = string.split('\n')
-
         if len(temp) == 1:
             self.lcd.message(string)
             return
-
         song = temp[0]
         time = temp[1]
         if len(song) > 16 + self.screen_position:

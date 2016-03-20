@@ -62,8 +62,8 @@ class AbstractMenu:
                 elif char == Keypad.SELECT:
                     self.accept_action()
                 prev = self.keypad.is_pressed
-                time.sleep(0.5)
+                time.sleep(0.3)
+
             else:
                 self.main_screen()
             time.sleep(1.0/1.5)
-            char = self.keypad.is_pressed

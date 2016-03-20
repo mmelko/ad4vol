@@ -6,28 +6,24 @@ import termios
 import os
 
 
-'''
-@Author mmelko
-Dummy screen implementation, mainly for testing purposes. Dummy screen shows
- information directly to console output '''
-
-
 class DummyScreen(AbstractScreen):
-
+    """
+    @Author mmelko
+    Dummy screen implementation, mainly for testing purposes. Dummy screen shows
+     information directly to console output
+    """
 
     def display_string(self, string):
         self.clean_screen()
-        sys.stdout.write(string+"\n")
+        sys.stdout.write(string + "\n")
 
     def clean_screen(self):
         os.system('clear')
 
 
-
 class DummyKeypad(AbstractKeypad):
-
     def __init__(self):
-        super(DummyKeypad,self).__init__()
+        super(DummyKeypad, self).__init__()
         '''try:
             self.screen = curses.initscr()
             curses.cbreak()
@@ -41,6 +37,7 @@ class DummyKeypad(AbstractKeypad):
             traceback.print_exc()
 
         '''
+
     def key_pressed(self):
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
@@ -49,18 +46,18 @@ class DummyKeypad(AbstractKeypad):
             ch = sys.stdin.read(1)
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        #print "b;a b;a bla bla bal alb"
+        # print "b;a b;a bla bla bal alb"
 
-        #ch = self.screen.getch()
+        # ch = self.screen.getch()
 
-        #return self.which_key(str(unichr(ch)))
+        # return self.which_key(str(unichr(ch)))
         return self.which_key(ch)
 
     def stop_and_clean(self):
         pass
-        #curses.echo()
-        #curses.nocbreak()
-        #curses.endwin()
+        # curses.echo()
+        # curses.nocbreak()
+        # curses.endwin()
 
     def which_key(self, char):
         if char == 'w':
@@ -73,6 +70,6 @@ class DummyKeypad(AbstractKeypad):
             return Keypad.LEFT
         elif char == "e":
             return Keypad.SELECT
-            #press CTRL+C
+            # press CTRL+C
         elif ord(char) == 3:
             return Keypad.EXIT

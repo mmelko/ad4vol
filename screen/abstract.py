@@ -28,7 +28,6 @@ class AbstractKeypad:
     def __init__(self):
         self.is_pressed = ""
         #pointer to screen
-        self.sreen = None
 
     @abstractmethod
     def key_pressed(self):
@@ -39,7 +38,7 @@ class AbstractKeypad:
         pass
 
     def start_listening(self):
-        refresh_rate = 10
+        refresh_rate = 20
         prev = ''
         while self.is_pressed <> Keypad.EXIT:
             char = self.key_pressed()

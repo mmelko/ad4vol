@@ -26,15 +26,21 @@ class HomeScreen(AbstractMenu):
 
     def left_action(self):
         self.display_string("Previous track")
+        self.__get_active_client().previous_track()
 
     def right_action(self):
         self.display_string("Next track")
+        self.__get_active_client().next_track()
 
     def up_action(self):
-        self.display_string("Volume UP")
+        self.display_string("pause/play")
 
     def down_action(self):
-        self.display_string("Volume Down")
+        self.display_string("stop")
 
     def accept_action(self):
-        pass
+        client = self.__get_active_client()
+        if client.is_playing() is True:
+            client.stop()
+        else:
+            client.play()
