@@ -9,7 +9,12 @@ class HomeScreen(AbstractMenu):
     #      super(HomeScreen, self).__init__(keypad, screen)
     def __init__(self, keypad, screen):
         super(HomeScreen, self).__init__(keypad, screen)
-        self.clients = [MPDClient(), SpotifyClient()]
+        self.clients = dict()
+        self.clients['mpd'] = MPDClient()
+        self.clients['spotify'] = SpotifyClient()
+        self.active_client = "mpd"
+
+          #  [MPDClient(), SpotifyClient()]
 
     def main_screen(self):
         client = self.__get_active_client()
@@ -19,10 +24,10 @@ class HomeScreen(AbstractMenu):
             self.display_string("Stopped")
 
     def __get_active_client(self):
-        for client in self.clients:
+        for name,client in self.clients.iteritems():
             if client.is_playing() is True:
                 return client;
-        return self.clients[len(self.clients) - 1]
+        return self.clients[self.active_client]
 
     def left_action(self):
         self.display_string("Previous track")
@@ -33,10 +38,13 @@ class HomeScreen(AbstractMenu):
         self.__get_active_client().next_track()
 
     def up_action(self):
-        self.display_string("pause/play")
+
+        self.display_string("Spotify activated")
+        self.active_client = 'spotify'
 
     def down_action(self):
-        self.display_string("stop")
+        self.display_string("MPD activated")
+        self.active_client = 'mpd'
 
     def accept_action(self):
         client = self.__get_active_client()

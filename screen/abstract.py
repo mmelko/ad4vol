@@ -42,8 +42,6 @@ class AbstractKeypad:
         prev = ''
         while self.is_pressed <> Keypad.EXIT:
             char = self.key_pressed()
-            if char <> prev:
-                prev = char
-                self.is_pressed = char
+            self.is_pressed = char
             time.sleep(1.0/refresh_rate)
         self.stop_and_clean()

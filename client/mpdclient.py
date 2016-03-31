@@ -3,17 +3,21 @@ import mpd
 
 
 class MPDClient(AbstractMusicClient):
-    def play(self):
-        pass
-
-    def stop(self):
-        pass
-
     def __init__(self):
         self.client = mpd.MPDClient()
         self.client.timeout = 10
         self.host = "localhost"
         self.port = 6600
+
+    def play(self):
+        self.connect()
+        self.client.play()
+        self.client.disconnect()
+
+    def stop(self):
+        self.connect()
+        self.client.stop()
+        self.client.disconnect()
 
     def get_current_song(self):
         self.connect()

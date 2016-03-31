@@ -14,7 +14,7 @@ class AbstractMenu:
     def __init__(self, keypad, screen):
         self.keypad = keypad
         self.screens = screen
-        self.refresh_rate = 20
+        self.refresh_rate = 10
         self.temp_char = ""
 
     @abstractmethod
@@ -62,8 +62,9 @@ class AbstractMenu:
                 elif char == Keypad.SELECT:
                     self.accept_action()
                 prev = self.keypad.is_pressed
+		self.keypad.is_pressed=''
                 time.sleep(0.3)
 
             else:
                 self.main_screen()
-            time.sleep(1.0/1.5)
+            time.sleep(1.0/self.refresh_rate)
